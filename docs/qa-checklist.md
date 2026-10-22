@@ -1,6 +1,6 @@
 # QA checklist
 
-Date: 2026-10-22 · Browsers: Chromium and WebKit (Playwright), plus the Claude desktop in-app browser for manual looks.
+Date: 2026-10-22 · Browsers: Chromium and WebKit (Playwright), plus a desktop in-app browser for manual looks.
 Not tested: Firefox (would not launch on the build machine), real devices, screen readers.
 
 ## Viewports

@@ -1,4 +1,4 @@
-# Claude Build Brief — OrbitOps SaaS Dashboard
+# OrbitOps SaaS Dashboard — Build Brief
 
 ## Role
 
