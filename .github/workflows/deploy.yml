@@ -1,4 +1,4 @@
-name: Deploy to GitHub Pages
+name: Build and optionally deploy to GitHub Pages
 
 on:
   push:
@@ -33,12 +33,20 @@ jobs:
           VITE_BASE: /${{ github.event.repository.name }}/
       # Pages has no SPA fallback: serve the app for unknown paths so deep links and refreshes work.
       - run: cp dist/index.html dist/404.html
+      # GitHub Pages is unavailable on some private-account plans. Keep CI green
+      # for private repositories and enable deployment automatically when Pages
+      # is available or the repository is later made public.
       - uses: actions/configure-pages@v5
+        if: ${{ !github.event.repository.private }}
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
+        if: ${{ !github.event.repository.private }}
         with:
           path: dist
 
   deploy:
+    if: ${{ !github.event.repository.private }}
     needs: build
     runs-on: ubuntu-latest
     environment:
