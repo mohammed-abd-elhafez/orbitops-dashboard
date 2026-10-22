@@ -1,0 +1,69 @@
+# Case study: OrbitOps operations dashboard
+
+*An independent portfolio concept. OrbitOps and all its data are fictional; this is not client work.*
+
+## Problem
+
+Small digital teams (agencies, product studios) run on a mix of project trackers, support inboxes and billing tools. The question they ask every morning is simple: **is anything on fire, and are we growing?** Answering it usually means opening four tabs.
+
+The design challenge was to put revenue, delivery risk, support load and recent activity on one screen without turning it into a wall of widgets.
+
+## Target users
+
+- **Studio lead / ops manager** (primary). Scans for risk first thing, wants the number and the reason in one glance.
+- **Project owner.** Checks their own projects' status and due dates, filters to "mine".
+- **Account manager.** Looks up a customer's plan, renewal date and health.
+
+## Information architecture
+
+Five destinations, ordered by how often a lead needs them:
+
+1. **Overview** — answers "how are we doing?" with four metrics, a trend, and the two lists that need action (projects at risk, latest activity).
+2. **Projects** — status-first: tabs by status with counts, then search, owner and sort.
+3. **Customers** — a classic data table: search, plan filter, sort, pagination.
+4. **Activity** — a chronological timeline grouped by day.
+5. **Settings** — profile, notifications, appearance.
+
+On the overview, project health is sorted by risk (blocked first, then at risk) rather than by name, so the most important rows are always on top.
+
+## Key design decisions
+
+**Calm and scannable over decorative.** A neutral surface, one accent colour, tabular numerals for figures, grouping by spacing and soft cards instead of heavy borders. Colour is reserved for status, and status is never colour alone: each badge carries an icon and a word.
+
+**Delta direction is not the same as good news.** An increase in open support items is a trend *up* but *unfavourable*. Metric deltas therefore carry an arrow for direction and a colour plus spoken prefix ("Needs attention") for meaning.
+
+**A date range that visibly changes things.** The 7 / 30 / 90-day control swaps the metric deltas and the revenue series, shows the covered dates in the page header, and re-runs a brief loading state, so the interaction is legible and not a static toggle.
+
+**Every region has a designed state.** Loading uses skeletons shaped like the final content (less layout shift). Empty states say what is missing and offer the next action. Errors are recoverable with Retry. Validation is split into blocking errors (a due date in the past) and non-blocking warnings (a due date within a week). A header "Demo state" switch lets a reviewer see each state without a backend.
+
+**Both themes, one token set.** Dark mode is a token override, not a second stylesheet, and was checked for contrast on its own.
+
+## Responsive behaviour
+
+- **≥ 1024px:** fixed sidebar plus content; overview uses a two-column grid.
+- **< 1024px:** the sidebar becomes a drawer opened from a labelled menu button; content is a single column.
+- Metric cards reflow with `auto-fit`; the segmented date control and filter toolbars wrap.
+- Wide tables scroll inside a focusable, labelled region so the page itself never scrolls sideways. Verified at 320, 375, 640, 768, 1024 and 1440px.
+
+## Accessibility work
+
+- Semantic landmarks, a skip link, one `h1` per page, per-route titles, and focus moved to `main` after navigation.
+- Drawer and dialog: labelled dialogs, focus trap, Esc and scrim to close, focus returned to the trigger, `aria-expanded` / `aria-controls` on the menu button.
+- Keyboard patterns: WAI-ARIA tabs (arrow keys, Home/End), native radios for the date range, `role="switch"` for settings, sortable headers with `aria-sort`.
+- Chart: a plain-language summary above it and a table alternative one click away.
+- Forms: visible labels, error text tied by `aria-describedby`, an error summary announced as an alert, and non-colour error cues.
+- Contrast measured in both themes, including control borders at 3:1 and a thick focus ring; reduced-motion respected.
+- Automated axe-core scans on each route (both themes) and on the dialog's error state, plus keyboard-focus assertions in the e2e suite.
+
+## What I intentionally did not build
+
+- **A backend, auth or server persistence.** Out of scope: the point is interface design. Data is typed and local; only demo-created projects and settings are kept in the browser's `localStorage`.
+- **Real-time updates, notification delivery, or user management.** They would need infrastructure that adds nothing to the design story.
+- **Chart zoom and brushing.** Hover/focus tooltips and the table view carry the data; range selection is a possible next step.
+- **Internationalisation and RTL.** Worth doing, but it deserves its own pass rather than a token effort.
+- **A screen-reader audit.** Automated and structural checks were done; assistive-technology testing was not.
+
+## Screenshots
+
+All generated by `npm run screenshots` into [`docs/screenshots`](screenshots): light and dark overview, mobile drawer, loading state, filtered projects, the new-project dialog with validation errors, sorted customers, error with Retry, chart as a table, chart tooltip, mobile card layouts (light and dark), activity timeline, the settings warning, an empty state, and forced-colours mode.
+

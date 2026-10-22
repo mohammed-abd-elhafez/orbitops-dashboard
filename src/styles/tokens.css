@@ -1,0 +1,138 @@
+/*
+  OrbitOps design tokens. Single source of truth for colour, type, spacing,
+  radius and elevation. Spacing follows an 8px scale (--space-1 = 4px half-step).
+  Contrast targets (WCAG 2.2 AA): text >= 4.5:1, UI/icons/focus >= 3:1.
+*/
+:root {
+  color-scheme: light;
+
+  /* Surfaces */
+  --bg: #f4f5f8;
+  --surface: #ffffff;
+  --surface-sunken: #eceef3;
+  --border: #cfd3dd;
+  --border-subtle: #e3e6ed;
+  /* Borders of interactive controls must reach 3:1 against their surroundings (WCAG 1.4.11). */
+  --control-border: #737c91;
+
+  /* Text */
+  --text: #151a23;
+  --text-muted: #475064;
+
+  /* Accent (one restrained hue) */
+  --accent: #2349c9;
+  --accent-hover: #1a3a9f;
+  --accent-contrast: #ffffff;
+  --accent-soft: #e6ebfb;
+  --focus: #1b3fb5;
+
+  /* Status: each pair has a text colour and a soft background */
+  --success: #146c3f;
+  --success-soft: #e0f4e8;
+  --warning: #805000;
+  --warning-soft: #fcf0d4;
+  --danger: #b0231a;
+  --danger-soft: #fbe5e3;
+  --info: #2349c9;
+  --info-soft: #e6ebfb;
+
+  /* Chart */
+  --chart-line: #2349c9;
+  --chart-fill: rgba(35, 73, 201, 0.12);
+  --chart-grid: #dde0e8;
+
+  /* Type */
+  --font-sans: 'Inter', 'Segoe UI', system-ui, -apple-system, 'Helvetica Neue', Arial, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-md: 1rem;
+  --text-lg: 1.25rem;
+  --text-xl: 1.625rem;
+  --text-2xl: 2rem;
+
+  /* Spacing (8px logic) */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+
+  /* Radius & elevation */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-sm: 0 1px 2px rgba(21, 26, 35, 0.06);
+  --shadow-md: 0 8px 24px rgba(21, 26, 35, 0.12);
+  --scrim: rgba(15, 18, 26, 0.5);
+
+  /* Layout */
+  --sidebar-width: 15rem;
+  --topbar-height: 3.5rem;
+  --content-max: 76rem;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #0d1017;
+  --surface: #161b25;
+  --surface-sunken: #0f131b;
+  --border: #3a4254;
+  --border-subtle: #262d3b;
+  --control-border: #7f889c;
+  --text: #eceff5;
+  --text-muted: #a6aec0;
+  --accent: #8ea6ff;
+  --accent-hover: #adbeff;
+  --accent-contrast: #0d1017;
+  --accent-soft: #212c52;
+  --focus: #b4c3ff;
+  --success: #6fd49b;
+  --success-soft: #153324;
+  --warning: #f0bf5c;
+  --warning-soft: #3a2c0c;
+  --danger: #ff9a92;
+  --danger-soft: #431b18;
+  --info: #8ea6ff;
+  --info-soft: #212c52;
+  --chart-line: #8ea6ff;
+  --chart-fill: rgba(142, 166, 255, 0.16);
+  --chart-grid: #2a3142;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --scrim: rgba(0, 0, 0, 0.65);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):not([data-theme='dark']) {
+    color-scheme: dark;
+    --bg: #0d1017;
+    --surface: #161b25;
+    --surface-sunken: #0f131b;
+    --border: #3a4254;
+    --border-subtle: #262d3b;
+    --control-border: #7f889c;
+    --text: #eceff5;
+    --text-muted: #a6aec0;
+    --accent: #8ea6ff;
+    --accent-hover: #adbeff;
+    --accent-contrast: #0d1017;
+    --accent-soft: #212c52;
+    --focus: #b4c3ff;
+    --success: #6fd49b;
+    --success-soft: #153324;
+    --warning: #f0bf5c;
+    --warning-soft: #3a2c0c;
+    --danger: #ff9a92;
+    --danger-soft: #431b18;
+    --info: #8ea6ff;
+    --info-soft: #212c52;
+    --chart-line: #8ea6ff;
+    --chart-fill: rgba(142, 166, 255, 0.16);
+    --chart-grid: #2a3142;
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --scrim: rgba(0, 0, 0, 0.65);
+  }
+}
